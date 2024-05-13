@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace transport_business_project.Transport_Business.Forms
 {
-    public partial class UpdateEmployee : Form
+    public partial class DeleteEmployee : Form
     {
-        public UpdateEmployee()
+        public DeleteEmployee()
         {
             InitializeComponent();
         }

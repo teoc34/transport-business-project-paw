@@ -12,6 +12,7 @@ namespace transport_business_project.Classes
         public float Capacity { get; set; }
         DateTime MaintenanceDate { get; set; }
 
+        public string LicensePlate { get; set; }
         public List<Type> Type { get; set; }
 
         public Transport()

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace transport_business_project.Transport_Business.Forms
 {
-    public partial class Form1 : Form
+    public partial class DashboardForm : Form
     {
-        public Form1()
+        public DashboardForm()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
