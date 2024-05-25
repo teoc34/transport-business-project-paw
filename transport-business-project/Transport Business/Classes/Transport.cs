@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace transport_business_project.Classes
 {
     public class Transport
     {
         public int TransportID { get; set; }
-        public float Capacity { get; set; }
-        DateTime MaintenanceDate { get; set; }
-
+        public string Make { get; set; }
+        public DateTime MaintenanceDate { get; set; }
         public string LicensePlate { get; set; }
-        public List<Type> Type { get; set; }
+        public List<string> Types { get; set; }
 
         public Transport()
         {
-            Type = new List<Type>();
+            Make = string.Empty;
+            LicensePlate = string.Empty;
+            Types = new List<string>();
         }
 
-        public Transport(int transportID, float capacity, DateTime maintenanceDate)
+        public Transport(int transportID, string make, DateTime maintenanceDate, string licensePlate, List<string> types)
         {
             TransportID = transportID;
-            Capacity = capacity;
+            Make = make;
             MaintenanceDate = maintenanceDate;
+            LicensePlate = licensePlate;
+            Types = types;
         }
     }
-
 }

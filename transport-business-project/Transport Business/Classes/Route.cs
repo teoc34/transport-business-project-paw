@@ -1,24 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace transport_business_project.Classes
 {
     internal class Route
     {
-        public int routeID { get; set; }
+        public int RouteID { get; set; }
         public string StartLocation { get; set; }
         public string EndLocation { get; set; }
         public float Distance { get; set; }
         public float EstimatedTime { get; set; }
 
-        public Route() { }
+        public Route()
+        {
+            StartLocation = string.Empty;
+            EndLocation = string.Empty;
+        }
 
         public Route(int routeID, string startLocation, string endLocation, float distance, float estimatedTime)
         {
-            this.routeID = routeID;
+            RouteID = routeID;
             StartLocation = startLocation;
             EndLocation = endLocation;
             Distance = distance;
