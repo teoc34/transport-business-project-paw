@@ -1,103 +1,112 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using transport_business_project.Classes;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Update
 {
     public partial class UpdateRoute : Form
     {
+        private TransportContext _context;
+        private Route selectedRoute;
+
         public UpdateRoute()
         {
             InitializeComponent();
+            _context = new TransportContext();
+            LoadRoutes();
+        }
+
+        private void LoadRoutes()
+        {
+            var routes = _context.Routes.ToList();
+            comboBoxRoutes.DataSource = routes;
+            comboBoxRoutes.DisplayMember = "StartLocation";
+            comboBoxRoutes.ValueMember = "RouteID";
+        }
+
+        private void comboBoxRoutes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedRouteId = (int)comboBoxRoutes.SelectedValue;
+            selectedRoute = _context.Routes.FirstOrDefault(r => r.RouteID == selectedRouteId);
+            if (selectedRoute != null)
+            {
+                txtStartLocation.Text = selectedRoute.StartLocation;
+                txtEndLocation.Text = selectedRoute.EndLocation;
+                txtDistance.Text = selectedRoute.Distance.ToString();
+                txtEstimatedTime.Text = selectedRoute.EstimatedTime.ToString();
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                // Update logic here
-                int routeID = int.Parse(txtRouteID.Text);
-                string startLocation = txtStartLocation.Text;
-                string endLocation = txtEndLocation.Text;
-                float distance = float.Parse(txtDistance.Text);
-                float estimatedTime = float.Parse(txtEstimatedTime.Text);
+                selectedRoute.StartLocation = txtStartLocation.Text;
+                selectedRoute.EndLocation = txtEndLocation.Text;
+                selectedRoute.Distance = float.Parse(txtDistance.Text);
+                selectedRoute.EstimatedTime = float.Parse(txtEstimatedTime.Text);
 
-                Route updatedRoute = new Route(routeID, startLocation, endLocation, distance, estimatedTime);
-                // Update the route in the database or collection
-
-                MessageBox.Show("Route updated successfully!");
+                _context.SaveChanges();
+                MessageBox.Show("Route updated successfully.");
                 this.Close();
             }
         }
 
-        private void txtRouteID_Validating(object sender, CancelEventArgs e)
-        {
-            if (!int.TryParse(txtRouteID.Text, out int routeID) || routeID <= 0)
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtRouteID, "Please enter a valid Route ID.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtRouteID, null);
-            }
-        }
-
-        private void txtStartLocation_Validating(object sender, CancelEventArgs e)
+        private void txtStartLocation_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtStartLocation.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtStartLocation, "Start Location cannot be empty.");
+                errorProvider.SetError(txtStartLocation, "Start Location is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtStartLocation, null);
+                errorProvider.SetError(txtStartLocation, "");
             }
         }
 
-        private void txtEndLocation_Validating(object sender, CancelEventArgs e)
+        private void txtEndLocation_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtEndLocation.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtEndLocation, "End Location cannot be empty.");
+                errorProvider.SetError(txtEndLocation, "End Location is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtEndLocation, null);
+                errorProvider.SetError(txtEndLocation, "");
             }
         }
 
-        private void txtDistance_Validating(object sender, CancelEventArgs e)
+        private void txtDistance_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!float.TryParse(txtDistance.Text, out float distance) || distance <= 0)
+            if (!float.TryParse(txtDistance.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtDistance, "Please enter a valid Distance.");
+                errorProvider.SetError(txtDistance, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtDistance, null);
+                errorProvider.SetError(txtDistance, "");
             }
         }
 
-        private void txtEstimatedTime_Validating(object sender, CancelEventArgs e)
+        private void txtEstimatedTime_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!float.TryParse(txtEstimatedTime.Text, out float estimatedTime) || estimatedTime <= 0)
+            if (!float.TryParse(txtEstimatedTime.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtEstimatedTime, "Please enter a valid Estimated Time.");
+                errorProvider.SetError(txtEstimatedTime, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtEstimatedTime, null);
+                errorProvider.SetError(txtEstimatedTime, "");
             }
         }
     }

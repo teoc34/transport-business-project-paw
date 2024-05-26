@@ -1,119 +1,128 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using transport_business_project.Classes;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Update
 {
     public partial class UpdateDriver : Form
     {
+        private TransportContext _context;
+        private Driver selectedDriver;
+
         public UpdateDriver()
         {
             InitializeComponent();
+            _context = new TransportContext();
+            LoadDrivers();
+        }
+
+        private void LoadDrivers()
+        {
+            var drivers = _context.Drivers.ToList();
+            comboBoxDrivers.DataSource = drivers;
+            comboBoxDrivers.DisplayMember = "Name";
+            comboBoxDrivers.ValueMember = "Id";
+        }
+
+        private void comboBoxDrivers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedDriverId = (int)comboBoxDrivers.SelectedValue;
+            selectedDriver = _context.Drivers.FirstOrDefault(d => d.Id == selectedDriverId);
+            if (selectedDriver != null)
+            {
+                txtName.Text = selectedDriver.Name;
+                txtLicenseNumber.Text = selectedDriver.LicenseNumber;
+                txtYearsOfExperience.Text = selectedDriver.YearsOfExperience.ToString();
+                txtMake.Text = selectedDriver.Make;
+                txtPlateNumber.Text = selectedDriver.PlateNumber;
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                // Update logic here
-                int id = int.Parse(txtId.Text);
-                string name = txtName.Text;
-                string licenseNumber = txtLicenseNumber.Text;
-                int yearsOfExperience = int.Parse(txtYearsOfExperience.Text);
-                string make = txtMake.Text;
-                string plateNumber = txtPlateNumber.Text;
+                selectedDriver.Name = txtName.Text;
+                selectedDriver.LicenseNumber = txtLicenseNumber.Text;
+                selectedDriver.YearsOfExperience = int.Parse(txtYearsOfExperience.Text);
+                selectedDriver.Make = txtMake.Text;
+                selectedDriver.PlateNumber = txtPlateNumber.Text;
 
-                Driver updatedDriver = new Driver(id, name, make, licenseNumber, yearsOfExperience, plateNumber);
-                // Update the driver in the database or collection
-
-                MessageBox.Show("Driver updated successfully!");
+                _context.SaveChanges();
+                MessageBox.Show("Driver updated successfully.");
                 this.Close();
             }
         }
 
-        private void txtId_Validating(object sender, CancelEventArgs e)
-        {
-            if (!int.TryParse(txtId.Text, out int id) || id <= 0)
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtId, "Please enter a valid Id.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtId, null);
-            }
-        }
-
-        private void txtName_Validating(object sender, CancelEventArgs e)
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtName, "Name cannot be empty.");
+                errorProvider.SetError(txtName, "Name is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtName, null);
+                errorProvider.SetError(txtName, "");
             }
         }
 
-        private void txtLicenseNumber_Validating(object sender, CancelEventArgs e)
+        private void txtLicenseNumber_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtLicenseNumber.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtLicenseNumber, "License number cannot be empty.");
+                errorProvider.SetError(txtLicenseNumber, "License Number is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtLicenseNumber, null);
+                errorProvider.SetError(txtLicenseNumber, "");
             }
         }
 
-        private void txtYearsOfExperience_Validating(object sender, CancelEventArgs e)
+        private void txtYearsOfExperience_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!int.TryParse(txtYearsOfExperience.Text, out int years) || years < 0)
+            if (!int.TryParse(txtYearsOfExperience.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtYearsOfExperience, "Please enter a valid number of years.");
+                errorProvider.SetError(txtYearsOfExperience, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtYearsOfExperience, null);
+                errorProvider.SetError(txtYearsOfExperience, "");
             }
         }
 
-        private void txtMake_Validating(object sender, CancelEventArgs e)
+        private void txtMake_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMake.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtMake, "Make cannot be empty.");
+                errorProvider.SetError(txtMake, "Make is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtMake, null);
+                errorProvider.SetError(txtMake, "");
             }
         }
 
-        private void txtPlateNumber_Validating(object sender, CancelEventArgs e)
+        private void txtPlateNumber_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtPlateNumber.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtPlateNumber, "Plate number cannot be empty.");
+                errorProvider.SetError(txtPlateNumber, "Plate Number is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtPlateNumber, null);
+                errorProvider.SetError(txtPlateNumber, "");
             }
         }
     }

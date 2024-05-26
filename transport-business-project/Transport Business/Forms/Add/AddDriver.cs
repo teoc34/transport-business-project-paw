@@ -1,126 +1,108 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using transport_business_project.Classes;
-using transport_business_project.Utilities;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Add
 {
     public partial class AddDriver : Form
     {
-        private const string FilePath = "drivers.xml";
+        private TransportContext _context;
 
         public AddDriver()
         {
             InitializeComponent();
-        }
-
-        private void AddDriver_Load(object sender, EventArgs e)
-        {
-            // Initialization code if needed
+            _context = new TransportContext();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                // Save logic here
-                int driverId = new Random().Next(1000);
-                string name = txtName.Text;
-                string licenseNumber = txtLicenseNumber.Text;
-                int yearsOfExperience = int.Parse(txtYearsOfExperience.Text);
-                string make = txtMake.Text;
-                string plateNumber = txtPlateNumber.Text;
-
-                Driver newDriver = new Driver(driverId, name, make, licenseNumber, yearsOfExperience, plateNumber);
-                List<Driver> drivers;
-
-                if (File.Exists(FilePath))
+                var driver = new Driver
                 {
-                    drivers = SerializationUtility.DeserializeFromFile<List<Driver>>(FilePath);
-                }
-                else
-                {
-                    drivers = new List<Driver>();
-                }
+                    Name = txtName.Text,
+                    LicenseNumber = txtLicenseNumber.Text,
+                    YearsOfExperience = int.Parse(txtYearsOfExperience.Text),
+                    Make = txtMake.Text,
+                    PlateNumber = txtPlateNumber.Text
+                };
 
-                drivers.Add(newDriver);
-                SerializationUtility.SerializeToFile(drivers, FilePath);
-
-                MessageBox.Show("Driver added successfully!");
+                _context.Drivers.Add(driver);
+                _context.SaveChanges();
+                MessageBox.Show("Driver added successfully.");
                 this.Close();
             }
         }
 
-        private void txtName_Validating(object sender, CancelEventArgs e)
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtName, "Name cannot be empty.");
+                errorProvider.SetError(txtName, "Name is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtName, null);
+                errorProvider.SetError(txtName, "");
             }
         }
 
-        private void txtLicenseNumber_Validating(object sender, CancelEventArgs e)
+        private void txtLicenseNumber_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtLicenseNumber.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtLicenseNumber, "License number cannot be empty.");
+                errorProvider.SetError(txtLicenseNumber, "License Number is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtLicenseNumber, null);
+                errorProvider.SetError(txtLicenseNumber, "");
             }
         }
 
-        private void txtYearsOfExperience_Validating(object sender, CancelEventArgs e)
+        private void txtYearsOfExperience_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!int.TryParse(txtYearsOfExperience.Text, out int years) || years < 0)
+            if (!int.TryParse(txtYearsOfExperience.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtYearsOfExperience, "Please enter a valid number of years.");
+                errorProvider.SetError(txtYearsOfExperience, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtYearsOfExperience, null);
+                errorProvider.SetError(txtYearsOfExperience, "");
             }
         }
 
-        private void txtMake_Validating(object sender, CancelEventArgs e)
+        private void txtMake_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMake.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtMake, "Make cannot be empty.");
+                errorProvider.SetError(txtMake, "Make is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtMake, null);
+                errorProvider.SetError(txtMake, "");
             }
         }
 
-        private void txtPlateNumber_Validating(object sender, CancelEventArgs e)
+        private void txtPlateNumber_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtPlateNumber.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtPlateNumber, "Plate number cannot be empty.");
+                errorProvider.SetError(txtPlateNumber, "Plate Number is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtPlateNumber, null);
+                errorProvider.SetError(txtPlateNumber, "");
             }
         }
     }

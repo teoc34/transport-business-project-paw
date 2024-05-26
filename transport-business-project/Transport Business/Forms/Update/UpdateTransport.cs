@@ -1,48 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using transport_business_project.Classes;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Update
 {
     public partial class UpdateTransport : Form
     {
+        private TransportContext context;
+        private Transport selectedTransport;
+
         public UpdateTransport()
         {
             InitializeComponent();
+            context = new TransportContext();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void UpdateTransport_Load(object sender, EventArgs e)
         {
-            if (ValidateChildren())
-            {
-                // Update logic here
-                int transportID = int.Parse(txtTransportID.Text);
-                string make = txtMake.Text;
-                DateTime maintenanceDate = dtpMaintenanceDate.Value;
-                string licensePlate = txtLicensePlate.Text;
-                List<string> types = new List<string>(txtTypes.Text.Split(','));
+            LoadTransports();
+        }
 
-                Transport updatedTransport = new Transport(transportID, make, maintenanceDate, licensePlate, types);
-                // Update the transport in the database or collection
+        private void LoadTransports()
+        {
+            var transports = context.Transports.ToList();
+            comboBoxTransports.DataSource = transports;
+            comboBoxTransports.DisplayMember = "LicensePlate";
+            comboBoxTransports.ValueMember = "TransportID";
+        }
+
+        private void comboBoxTransports_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxTransports.SelectedItem != null)
+            {
+                selectedTransport = (Transport)comboBoxTransports.SelectedItem;
+                txtMake.Text = selectedTransport.Make;
+                dtpMaintenanceDate.Value = selectedTransport.MaintenanceDate;
+                txtLicensePlate.Text = selectedTransport.LicensePlate;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (ValidateChildren() && selectedTransport != null)
+            {
+                selectedTransport.Make = txtMake.Text;
+                selectedTransport.MaintenanceDate = dtpMaintenanceDate.Value;
+                selectedTransport.LicensePlate = txtLicensePlate.Text;
+
+                context.SaveChanges();
 
                 MessageBox.Show("Transport updated successfully!");
                 this.Close();
-            }
-        }
-
-        private void txtTransportID_Validating(object sender, CancelEventArgs e)
-        {
-            if (!int.TryParse(txtTransportID.Text, out int transportID) || transportID <= 0)
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtTransportID, "Please enter a valid Transport ID.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtTransportID, null);
             }
         }
 

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using transport_business_project.Transport_Business.Forms.Add;
 using transport_business_project.Transport_Business.Forms.Delete;
 using transport_business_project.Transport_Business.Forms.Update;
 using transport_business_project.Classes;
+using transport_business_project.Data;
 using transport_business_project.Utilities;
 
 namespace transport_business_project.Transport_Business.Forms
@@ -20,7 +22,6 @@ namespace transport_business_project.Transport_Business.Forms
         public MainForm()
         {
             InitializeComponent();
-            InitializeCustomComponents();
         }
 
         private void BtnUpdate_Click(object sender, EventArgs e)
@@ -100,6 +101,11 @@ namespace transport_business_project.Transport_Business.Forms
             // Load data if necessary
         }
 
+        private void ExportReportMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportReport();
+        }
+
         private void ExportReport()
         {
             try
@@ -165,7 +171,6 @@ namespace transport_business_project.Transport_Business.Forms
                                     writer.WriteLine($"Make: {transport.Make}");
                                     writer.WriteLine($"Maintenance Date: {transport.MaintenanceDate.ToShortDateString()}");
                                     writer.WriteLine($"License Plate: {transport.LicensePlate}");
-                                    writer.WriteLine($"Types: {string.Join(", ", transport.Types)}");
                                     writer.WriteLine();
                                 }
                             }
@@ -181,10 +186,20 @@ namespace transport_business_project.Transport_Business.Forms
             }
         }
 
+        private void ViewChartMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewChart();
+        }
+
         private void ViewChart()
         {
             ChartForm chartForm = new ChartForm();
             chartForm.ShowDialog();
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

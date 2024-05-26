@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Forms;
 using transport_business_project.Classes;
-using transport_business_project.Utilities;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Add
 {
     public partial class AddTransport : Form
     {
-        private const string FilePath = "transports.xml";
+        private TransportContext context;
 
         public AddTransport()
         {
             InitializeComponent();
+            context = new TransportContext();
         }
 
         private void AddTransport_Load(object sender, EventArgs e)
@@ -26,44 +26,18 @@ namespace transport_business_project.Transport_Business.Forms.Add
         {
             if (ValidateChildren())
             {
-                // Save logic here
-                int transportID = new Random().Next(1000);
-                string make = txtMake.Text;
-                DateTime maintenanceDate = dtpMaintenanceDate.Value;
-                string licensePlate = txtLicensePlate.Text;
-                List<string> types = new List<string>(txtTypes.Text.Split(','));
-
-                Transport newTransport = new Transport(transportID, make, maintenanceDate, licensePlate, types);
-                List<Transport> transports;
-
-                if (File.Exists(FilePath))
+                var newTransport = new Transport
                 {
-                    transports = SerializationUtility.DeserializeFromFile<List<Transport>>(FilePath);
-                }
-                else
-                {
-                    transports = new List<Transport>();
-                }
+                    Make = txtMake.Text,
+                    MaintenanceDate = dtpMaintenanceDate.Value,
+                    LicensePlate = txtLicensePlate.Text,
+                };
 
-                transports.Add(newTransport);
-                SerializationUtility.SerializeToFile(transports, FilePath);
+                context.Transports.Add(newTransport);
+                context.SaveChanges();
 
                 MessageBox.Show("Transport added successfully!");
                 this.Close();
-            }
-        }
-
-        private void txtTransportID_Validating(object sender, CancelEventArgs e)
-        {
-            if (!int.TryParse(txtTransportID.Text, out int transportID) || transportID <= 0)
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtTransportID, "Please enter a valid Transport ID.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtTransportID, null);
             }
         }
 

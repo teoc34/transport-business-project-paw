@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace transport_business_project.Classes
 {
     public class Driver
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string LicenseNumber { get; set; }
@@ -11,13 +12,7 @@ namespace transport_business_project.Classes
         public string Make { get; set; }
         public string PlateNumber { get; set; }
 
-        public Driver()
-        {
-            Name = string.Empty;
-            LicenseNumber = string.Empty;
-            Make = string.Empty;
-            PlateNumber = string.Empty;
-        }
+        public Driver() { }
 
         public Driver(int id, string name, string make, string licenseNumber, int yearsOfExperience, string plateNumber)
         {

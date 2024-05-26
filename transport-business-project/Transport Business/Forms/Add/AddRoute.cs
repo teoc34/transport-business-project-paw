@@ -1,125 +1,93 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using transport_business_project.Classes;
-using transport_business_project.Utilities;
+using transport_business_project.Data;
 
 namespace transport_business_project.Transport_Business.Forms.Add
 {
     public partial class AddRoute : Form
     {
-        private const string FilePath = "routes.xml";
+        private TransportContext _context;
 
         public AddRoute()
         {
             InitializeComponent();
-        }
-
-        private void AddRoute_Load(object sender, EventArgs e)
-        {
-            // Initialization code if needed
+            _context = new TransportContext();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (ValidateChildren())
+            if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                // Save logic here
-                int routeID = new Random().Next(1000);
-                string startLocation = txtStartLocation.Text;
-                string endLocation = txtEndLocation.Text;
-                float distance = float.Parse(txtDistance.Text);
-                float estimatedTime = float.Parse(txtEstimatedTime.Text);
-
-                Route newRoute = new Route(routeID, startLocation, endLocation, distance, estimatedTime);
-                List<Route> routes;
-
-                if (File.Exists(FilePath))
+                var route = new Route
                 {
-                    routes = SerializationUtility.DeserializeFromFile<List<Route>>(FilePath);
-                }
-                else
-                {
-                    routes = new List<Route>();
-                }
+                    StartLocation = txtStartLocation.Text,
+                    EndLocation = txtEndLocation.Text,
+                    Distance = float.Parse(txtDistance.Text),
+                    EstimatedTime = float.Parse(txtEstimatedTime.Text)
+                };
 
-                routes.Add(newRoute);
-                SerializationUtility.SerializeToFile(routes, FilePath);
-
-                MessageBox.Show("Route added successfully!");
+                _context.Routes.Add(route);
+                _context.SaveChanges();
+                MessageBox.Show("Route added successfully.");
                 this.Close();
             }
         }
 
-        private void txtRouteID_Validating(object sender, CancelEventArgs e)
-        {
-            if (!int.TryParse(txtRouteID.Text, out int routeID) || routeID <= 0)
-            {
-                e.Cancel = true;
-                errorProvider.SetError(txtRouteID, "Please enter a valid Route ID.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtRouteID, null);
-            }
-        }
-
-        private void txtStartLocation_Validating(object sender, CancelEventArgs e)
+        private void txtStartLocation_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtStartLocation.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtStartLocation, "Start Location cannot be empty.");
+                errorProvider.SetError(txtStartLocation, "Start Location is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtStartLocation, null);
+                errorProvider.SetError(txtStartLocation, "");
             }
         }
 
-        private void txtEndLocation_Validating(object sender, CancelEventArgs e)
+        private void txtEndLocation_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtEndLocation.Text))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtEndLocation, "End Location cannot be empty.");
+                errorProvider.SetError(txtEndLocation, "End Location is required.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtEndLocation, null);
+                errorProvider.SetError(txtEndLocation, "");
             }
         }
 
-        private void txtDistance_Validating(object sender, CancelEventArgs e)
+        private void txtDistance_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!float.TryParse(txtDistance.Text, out float distance) || distance <= 0)
+            if (!float.TryParse(txtDistance.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtDistance, "Please enter a valid Distance.");
+                errorProvider.SetError(txtDistance, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtDistance, null);
+                errorProvider.SetError(txtDistance, "");
             }
         }
 
-        private void txtEstimatedTime_Validating(object sender, CancelEventArgs e)
+        private void txtEstimatedTime_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!float.TryParse(txtEstimatedTime.Text, out float estimatedTime) || estimatedTime <= 0)
+            if (!float.TryParse(txtEstimatedTime.Text, out _))
             {
                 e.Cancel = true;
-                errorProvider.SetError(txtEstimatedTime, "Please enter a valid Estimated Time.");
+                errorProvider.SetError(txtEstimatedTime, "Invalid number.");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(txtEstimatedTime, null);
+                errorProvider.SetError(txtEstimatedTime, "");
             }
         }
     }

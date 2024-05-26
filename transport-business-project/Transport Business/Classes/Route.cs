@@ -1,20 +1,17 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace transport_business_project.Classes
 {
-    internal class Route
+    public class Route
     {
+        [Key]
         public int RouteID { get; set; }
         public string StartLocation { get; set; }
         public string EndLocation { get; set; }
         public float Distance { get; set; }
         public float EstimatedTime { get; set; }
 
-        public Route()
-        {
-            StartLocation = string.Empty;
-            EndLocation = string.Empty;
-        }
+        public Route() { }
 
         public Route(int routeID, string startLocation, string endLocation, float distance, float estimatedTime)
         {

@@ -1,156 +1,169 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace transport_business_project.Transport_Business.Forms.Add
+﻿namespace transport_business_project.Transport_Business.Forms.Add
 {
     partial class AddDriver
     {
         private System.ComponentModel.IContainer components = null;
-        private Label lblName;
-        private TextBox txtName;
-        private Label lblLicenseNumber;
-        private TextBox txtLicenseNumber;
-        private Label lblYearsOfExperience;
-        private TextBox txtYearsOfExperience;
-        private Label lblMake;
-        private TextBox txtMake;
-        private Label lblPlateNumber;
-        private TextBox txtPlateNumber;
-        private Button btnSave;
-        private ErrorProvider errorProvider;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblLicenseNumber;
+        private System.Windows.Forms.TextBox txtLicenseNumber;
+        private System.Windows.Forms.Label lblYearsOfExperience;
+        private System.Windows.Forms.TextBox txtYearsOfExperience;
+        private System.Windows.Forms.Label lblMake;
+        private System.Windows.Forms.TextBox txtMake;
+        private System.Windows.Forms.Label lblPlateNumber;
+        private System.Windows.Forms.TextBox txtPlateNumber;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            lblName = new Label();
-            txtName = new TextBox();
-            lblLicenseNumber = new Label();
-            txtLicenseNumber = new TextBox();
-            lblYearsOfExperience = new Label();
-            txtYearsOfExperience = new TextBox();
-            lblMake = new Label();
-            txtMake = new TextBox();
-            lblPlateNumber = new Label();
-            txtPlateNumber = new TextBox();
-            btnSave = new Button();
-            errorProvider = new ErrorProvider(components);
-            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblLicenseNumber = new System.Windows.Forms.Label();
+            this.txtLicenseNumber = new System.Windows.Forms.TextBox();
+            this.lblYearsOfExperience = new System.Windows.Forms.Label();
+            this.txtYearsOfExperience = new System.Windows.Forms.TextBox();
+            this.lblMake = new System.Windows.Forms.Label();
+            this.txtMake = new System.Windows.Forms.TextBox();
+            this.lblPlateNumber = new System.Windows.Forms.Label();
+            this.txtPlateNumber = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.SuspendLayout();
             // 
             // lblName
             // 
-            lblName.AutoSize = true;
-            lblName.Location = new Point(13, 13);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(42, 15);
-            lblName.TabIndex = 0;
-            lblName.Text = "Name:";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(12, 15);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(38, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Name:";
             // 
             // txtName
             // 
-            txtName.Location = new Point(100, 10);
-            txtName.Name = "txtName";
-            txtName.Size = new Size(200, 23);
-            txtName.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(15, 31);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(257, 20);
+            this.txtName.TabIndex = 1;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
             // lblLicenseNumber
             // 
-            lblLicenseNumber.AutoSize = true;
-            lblLicenseNumber.Location = new Point(13, 39);
-            lblLicenseNumber.Name = "lblLicenseNumber";
-            lblLicenseNumber.Size = new Size(96, 15);
-            lblLicenseNumber.TabIndex = 2;
-            lblLicenseNumber.Text = "License Number:";
+            this.lblLicenseNumber.AutoSize = true;
+            this.lblLicenseNumber.Location = new System.Drawing.Point(12, 64);
+            this.lblLicenseNumber.Name = "lblLicenseNumber";
+            this.lblLicenseNumber.Size = new System.Drawing.Size(85, 13);
+            this.lblLicenseNumber.TabIndex = 2;
+            this.lblLicenseNumber.Text = "License Number:";
             // 
             // txtLicenseNumber
             // 
-            txtLicenseNumber.Location = new Point(100, 36);
-            txtLicenseNumber.Name = "txtLicenseNumber";
-            txtLicenseNumber.Size = new Size(200, 23);
-            txtLicenseNumber.TabIndex = 3;
+            this.txtLicenseNumber.Location = new System.Drawing.Point(15, 80);
+            this.txtLicenseNumber.Name = "txtLicenseNumber";
+            this.txtLicenseNumber.Size = new System.Drawing.Size(257, 20);
+            this.txtLicenseNumber.TabIndex = 3;
+            this.txtLicenseNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtLicenseNumber_Validating);
             // 
             // lblYearsOfExperience
             // 
-            lblYearsOfExperience.AutoSize = true;
-            lblYearsOfExperience.Location = new Point(13, 65);
-            lblYearsOfExperience.Name = "lblYearsOfExperience";
-            lblYearsOfExperience.Size = new Size(111, 15);
-            lblYearsOfExperience.TabIndex = 4;
-            lblYearsOfExperience.Text = "Years of Experience:";
+            this.lblYearsOfExperience.AutoSize = true;
+            this.lblYearsOfExperience.Location = new System.Drawing.Point(12, 113);
+            this.lblYearsOfExperience.Name = "lblYearsOfExperience";
+            this.lblYearsOfExperience.Size = new System.Drawing.Size(107, 13);
+            this.lblYearsOfExperience.TabIndex = 4;
+            this.lblYearsOfExperience.Text = "Years of Experience:";
             // 
             // txtYearsOfExperience
             // 
-            txtYearsOfExperience.Location = new Point(100, 62);
-            txtYearsOfExperience.Name = "txtYearsOfExperience";
-            txtYearsOfExperience.Size = new Size(50, 23);
-            txtYearsOfExperience.TabIndex = 5;
+            this.txtYearsOfExperience.Location = new System.Drawing.Point(15, 129);
+            this.txtYearsOfExperience.Name = "txtYearsOfExperience";
+            this.txtYearsOfExperience.Size = new System.Drawing.Size(257, 20);
+            this.txtYearsOfExperience.TabIndex = 5;
+            this.txtYearsOfExperience.Validating += new System.ComponentModel.CancelEventHandler(this.txtYearsOfExperience_Validating);
             // 
             // lblMake
             // 
-            lblMake.AutoSize = true;
-            lblMake.Location = new Point(13, 91);
-            lblMake.Name = "lblMake";
-            lblMake.Size = new Size(39, 15);
-            lblMake.TabIndex = 6;
-            lblMake.Text = "Make:";
+            this.lblMake.AutoSize = true;
+            this.lblMake.Location = new System.Drawing.Point(12, 162);
+            this.lblMake.Name = "lblMake";
+            this.lblMake.Size = new System.Drawing.Size(37, 13);
+            this.lblMake.TabIndex = 6;
+            this.lblMake.Text = "Make:";
             // 
             // txtMake
             // 
-            txtMake.Location = new Point(100, 88);
-            txtMake.Name = "txtMake";
-            txtMake.Size = new Size(200, 23);
-            txtMake.TabIndex = 7;
+            this.txtMake.Location = new System.Drawing.Point(15, 178);
+            this.txtMake.Name = "txtMake";
+            this.txtMake.Size = new System.Drawing.Size(257, 20);
+            this.txtMake.TabIndex = 7;
+            this.txtMake.Validating += new System.ComponentModel.CancelEventHandler(this.txtMake_Validating);
             // 
             // lblPlateNumber
             // 
-            lblPlateNumber.AutoSize = true;
-            lblPlateNumber.Location = new Point(13, 117);
-            lblPlateNumber.Name = "lblPlateNumber";
-            lblPlateNumber.Size = new Size(83, 15);
-            lblPlateNumber.TabIndex = 8;
-            lblPlateNumber.Text = "Plate Number:";
+            this.lblPlateNumber.AutoSize = true;
+            this.lblPlateNumber.Location = new System.Drawing.Point(12, 211);
+            this.lblPlateNumber.Name = "lblPlateNumber";
+            this.lblPlateNumber.Size = new System.Drawing.Size(74, 13);
+            this.lblPlateNumber.TabIndex = 8;
+            this.lblPlateNumber.Text = "Plate Number:";
             // 
             // txtPlateNumber
             // 
-            txtPlateNumber.Location = new Point(100, 114);
-            txtPlateNumber.Name = "txtPlateNumber";
-            txtPlateNumber.Size = new Size(200, 23);
-            txtPlateNumber.TabIndex = 9;
+            this.txtPlateNumber.Location = new System.Drawing.Point(15, 227);
+            this.txtPlateNumber.Name = "txtPlateNumber";
+            this.txtPlateNumber.Size = new System.Drawing.Size(257, 20);
+            this.txtPlateNumber.TabIndex = 9;
+            this.txtPlateNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtPlateNumber_Validating);
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(100, 140);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
-            btnSave.TabIndex = 10;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
+            this.btnSave.Location = new System.Drawing.Point(197, 263);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 10;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // errorProvider
             // 
-            errorProvider.ContainerControl = this;
+            this.errorProvider.ContainerControl = this;
             // 
             // AddDriver
             // 
-            ClientSize = new Size(320, 180);
-            Controls.Add(lblName);
-            Controls.Add(txtName);
-            Controls.Add(lblLicenseNumber);
-            Controls.Add(txtLicenseNumber);
-            Controls.Add(lblYearsOfExperience);
-            Controls.Add(txtYearsOfExperience);
-            Controls.Add(lblMake);
-            Controls.Add(txtMake);
-            Controls.Add(lblPlateNumber);
-            Controls.Add(txtPlateNumber);
-            Controls.Add(btnSave);
-            Name = "AddDriver";
-            Text = "Add Driver";
-            Load += AddDriver_Load;
-            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 298);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.txtPlateNumber);
+            this.Controls.Add(this.lblPlateNumber);
+            this.Controls.Add(this.txtMake);
+            this.Controls.Add(this.lblMake);
+            this.Controls.Add(this.txtYearsOfExperience);
+            this.Controls.Add(this.lblYearsOfExperience);
+            this.Controls.Add(this.txtLicenseNumber);
+            this.Controls.Add(this.lblLicenseNumber);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.lblName);
+            this.Name = "AddDriver";
+            this.Text = "Add Driver";
+           // this.Load += new System.EventHandler(this.AddDriver_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
     }
 }
