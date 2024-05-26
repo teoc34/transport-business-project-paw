@@ -3,17 +3,17 @@
     partial class UpdateRoute
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox comboBoxRoutes;
-        private System.Windows.Forms.Label lblStartLocation;
-        private System.Windows.Forms.TextBox txtStartLocation;
-        private System.Windows.Forms.Label lblEndLocation;
-        private System.Windows.Forms.TextBox txtEndLocation;
-        private System.Windows.Forms.Label lblDistance;
-        private System.Windows.Forms.TextBox txtDistance;
-        private System.Windows.Forms.Label lblEstimatedTime;
-        private System.Windows.Forms.TextBox txtEstimatedTime;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private ComboBox comboBoxRoutes;
+        private Label lblStartLocation;
+        private TextBox txtStartLocation;
+        private Label lblEndLocation;
+        private TextBox txtEndLocation;
+        private Label lblDistance;
+        private TextBox txtDistance;
+        private Label lblEstimatedTime;
+        private TextBox txtEstimatedTime;
+        private Button btnSave;
+        private ErrorProvider errorProvider;
 
         protected override void Dispose(bool disposing)
         {
@@ -26,133 +26,143 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.comboBoxRoutes = new System.Windows.Forms.ComboBox();
-            this.lblStartLocation = new System.Windows.Forms.Label();
-            this.txtStartLocation = new System.Windows.Forms.TextBox();
-            this.lblEndLocation = new System.Windows.Forms.Label();
-            this.txtEndLocation = new System.Windows.Forms.TextBox();
-            this.lblDistance = new System.Windows.Forms.Label();
-            this.txtDistance = new System.Windows.Forms.TextBox();
-            this.lblEstimatedTime = new System.Windows.Forms.Label();
-            this.txtEstimatedTime = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            comboBoxRoutes = new ComboBox();
+            lblStartLocation = new Label();
+            txtStartLocation = new TextBox();
+            lblEndLocation = new Label();
+            txtEndLocation = new TextBox();
+            lblDistance = new Label();
+            txtDistance = new TextBox();
+            lblEstimatedTime = new Label();
+            txtEstimatedTime = new TextBox();
+            btnSave = new Button();
+            errorProvider = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            SuspendLayout();
             // 
             // comboBoxRoutes
             // 
-            this.comboBoxRoutes.FormattingEnabled = true;
-            this.comboBoxRoutes.Location = new System.Drawing.Point(12, 12);
-            this.comboBoxRoutes.Name = "comboBoxRoutes";
-            this.comboBoxRoutes.Size = new System.Drawing.Size(260, 21);
-            this.comboBoxRoutes.TabIndex = 0;
-            this.comboBoxRoutes.SelectedIndexChanged += new System.EventHandler(this.comboBoxRoutes_SelectedIndexChanged);
+            comboBoxRoutes.FormattingEnabled = true;
+            comboBoxRoutes.Location = new Point(14, 14);
+            comboBoxRoutes.Margin = new Padding(4, 3, 4, 3);
+            comboBoxRoutes.Name = "comboBoxRoutes";
+            comboBoxRoutes.Size = new Size(303, 23);
+            comboBoxRoutes.TabIndex = 0;
+            comboBoxRoutes.SelectedIndexChanged += comboBoxRoutes_SelectedIndexChanged;
             // 
             // lblStartLocation
             // 
-            this.lblStartLocation.AutoSize = true;
-            this.lblStartLocation.Location = new System.Drawing.Point(12, 46);
-            this.lblStartLocation.Name = "lblStartLocation";
-            this.lblStartLocation.Size = new System.Drawing.Size(76, 13);
-            this.lblStartLocation.TabIndex = 1;
-            this.lblStartLocation.Text = "Start Location:";
+            lblStartLocation.AutoSize = true;
+            lblStartLocation.Location = new Point(14, 53);
+            lblStartLocation.Margin = new Padding(4, 0, 4, 0);
+            lblStartLocation.Name = "lblStartLocation";
+            lblStartLocation.Size = new Size(83, 15);
+            lblStartLocation.TabIndex = 1;
+            lblStartLocation.Text = "Start Location:";
             // 
             // txtStartLocation
             // 
-            this.txtStartLocation.Location = new System.Drawing.Point(12, 62);
-            this.txtStartLocation.Name = "txtStartLocation";
-            this.txtStartLocation.Size = new System.Drawing.Size(260, 20);
-            this.txtStartLocation.TabIndex = 2;
-            this.txtStartLocation.Validating += new System.ComponentModel.CancelEventHandler(this.txtStartLocation_Validating);
+            txtStartLocation.Location = new Point(14, 72);
+            txtStartLocation.Margin = new Padding(4, 3, 4, 3);
+            txtStartLocation.Name = "txtStartLocation";
+            txtStartLocation.Size = new Size(303, 23);
+            txtStartLocation.TabIndex = 2;
+            txtStartLocation.Validating += txtStartLocation_Validating;
             // 
             // lblEndLocation
             // 
-            this.lblEndLocation.AutoSize = true;
-            this.lblEndLocation.Location = new System.Drawing.Point(12, 95);
-            this.lblEndLocation.Name = "lblEndLocation";
-            this.lblEndLocation.Size = new System.Drawing.Size(73, 13);
-            this.lblEndLocation.TabIndex = 3;
-            this.lblEndLocation.Text = "End Location:";
+            lblEndLocation.AutoSize = true;
+            lblEndLocation.Location = new Point(14, 110);
+            lblEndLocation.Margin = new Padding(4, 0, 4, 0);
+            lblEndLocation.Name = "lblEndLocation";
+            lblEndLocation.Size = new Size(79, 15);
+            lblEndLocation.TabIndex = 3;
+            lblEndLocation.Text = "End Location:";
             // 
             // txtEndLocation
             // 
-            this.txtEndLocation.Location = new System.Drawing.Point(12, 111);
-            this.txtEndLocation.Name = "txtEndLocation";
-            this.txtEndLocation.Size = new System.Drawing.Size(260, 20);
-            this.txtEndLocation.TabIndex = 4;
-            this.txtEndLocation.Validating += new System.ComponentModel.CancelEventHandler(this.txtEndLocation_Validating);
+            txtEndLocation.Location = new Point(14, 128);
+            txtEndLocation.Margin = new Padding(4, 3, 4, 3);
+            txtEndLocation.Name = "txtEndLocation";
+            txtEndLocation.Size = new Size(303, 23);
+            txtEndLocation.TabIndex = 4;
+            txtEndLocation.Validating += txtEndLocation_Validating;
             // 
             // lblDistance
             // 
-            this.lblDistance.AutoSize = true;
-            this.lblDistance.Location = new System.Drawing.Point(12, 144);
-            this.lblDistance.Name = "lblDistance";
-            this.lblDistance.Size = new System.Drawing.Size(52, 13);
-            this.lblDistance.TabIndex = 5;
-            this.lblDistance.Text = "Distance:";
+            lblDistance.AutoSize = true;
+            lblDistance.Location = new Point(14, 166);
+            lblDistance.Margin = new Padding(4, 0, 4, 0);
+            lblDistance.Name = "lblDistance";
+            lblDistance.Size = new Size(55, 15);
+            lblDistance.TabIndex = 5;
+            lblDistance.Text = "Distance:";
             // 
             // txtDistance
             // 
-            this.txtDistance.Location = new System.Drawing.Point(12, 160);
-            this.txtDistance.Name = "txtDistance";
-            this.txtDistance.Size = new System.Drawing.Size(260, 20);
-            this.txtDistance.TabIndex = 6;
-            this.txtDistance.Validating += new System.ComponentModel.CancelEventHandler(this.txtDistance_Validating);
+            txtDistance.Location = new Point(14, 185);
+            txtDistance.Margin = new Padding(4, 3, 4, 3);
+            txtDistance.Name = "txtDistance";
+            txtDistance.Size = new Size(303, 23);
+            txtDistance.TabIndex = 6;
+            txtDistance.Validating += txtDistance_Validating;
             // 
             // lblEstimatedTime
             // 
-            this.lblEstimatedTime.AutoSize = true;
-            this.lblEstimatedTime.Location = new System.Drawing.Point(12, 193);
-            this.lblEstimatedTime.Name = "lblEstimatedTime";
-            this.lblEstimatedTime.Size = new System.Drawing.Size(80, 13);
-            this.lblEstimatedTime.TabIndex = 7;
-            this.lblEstimatedTime.Text = "Estimated Time:";
+            lblEstimatedTime.AutoSize = true;
+            lblEstimatedTime.Location = new Point(14, 223);
+            lblEstimatedTime.Margin = new Padding(4, 0, 4, 0);
+            lblEstimatedTime.Name = "lblEstimatedTime";
+            lblEstimatedTime.Size = new Size(91, 15);
+            lblEstimatedTime.TabIndex = 7;
+            lblEstimatedTime.Text = "Estimated Time:";
             // 
             // txtEstimatedTime
             // 
-            this.txtEstimatedTime.Location = new System.Drawing.Point(12, 209);
-            this.txtEstimatedTime.Name = "txtEstimatedTime";
-            this.txtEstimatedTime.Size = new System.Drawing.Size(260, 20);
-            this.txtEstimatedTime.TabIndex = 8;
-            this.txtEstimatedTime.Validating += new System.ComponentModel.CancelEventHandler(this.txtEstimatedTime_Validating);
+            txtEstimatedTime.Location = new Point(14, 241);
+            txtEstimatedTime.Margin = new Padding(4, 3, 4, 3);
+            txtEstimatedTime.Name = "txtEstimatedTime";
+            txtEstimatedTime.Size = new Size(303, 23);
+            txtEstimatedTime.TabIndex = 8;
+            txtEstimatedTime.Validating += txtEstimatedTime_Validating;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(197, 235);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 9;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-          //  this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Location = new Point(230, 271);
+            btnSave.Margin = new Padding(4, 3, 4, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(88, 27);
+            btnSave.TabIndex = 9;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
             // 
             // errorProvider
             // 
-            this.errorProvider.ContainerControl = this;
+            errorProvider.ContainerControl = this;
             // 
             // UpdateRoute
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 270);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.txtEstimatedTime);
-            this.Controls.Add(this.lblEstimatedTime);
-            this.Controls.Add(this.txtDistance);
-            this.Controls.Add(this.lblDistance);
-            this.Controls.Add(this.txtEndLocation);
-            this.Controls.Add(this.lblEndLocation);
-            this.Controls.Add(this.txtStartLocation);
-            this.Controls.Add(this.lblStartLocation);
-            this.Controls.Add(this.comboBoxRoutes);
-            this.Name = "UpdateRoute";
-            this.Text = "Update Route";
-        //    this.Load += new System.EventHandler(this.UpdateRoute_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(331, 312);
+            Controls.Add(btnSave);
+            Controls.Add(txtEstimatedTime);
+            Controls.Add(lblEstimatedTime);
+            Controls.Add(txtDistance);
+            Controls.Add(lblDistance);
+            Controls.Add(txtEndLocation);
+            Controls.Add(lblEndLocation);
+            Controls.Add(txtStartLocation);
+            Controls.Add(lblStartLocation);
+            Controls.Add(comboBoxRoutes);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "UpdateRoute";
+            Text = "Update Route";
+            Load += UpdateRoute_Load;
+            ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }

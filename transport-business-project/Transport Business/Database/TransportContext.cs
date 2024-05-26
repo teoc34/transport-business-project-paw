@@ -16,8 +16,9 @@ namespace transport_business_project.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            // Additional configuration if necessary
+            modelBuilder.Entity<Driver>().HasKey(d => d.Id);
+            modelBuilder.Entity<Route>().HasKey(r => r.RouteID);
+            modelBuilder.Entity<Transport>().HasKey(t => t.TransportID);
         }
     }
 }

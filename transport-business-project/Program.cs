@@ -1,18 +1,24 @@
-using transport_business_project.Transport_Business.Forms;
+using System;
+using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore;
+using transport_business_project.Data;
 
-namespace transport_business_project
+namespace transport_business_project.Transport_Business.Forms
 {
-    internal static class Program
+    static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            // Ensure database is created
+            using (var context = new TransportContext())
+            {
+                context.Database.Migrate();
+            }
+
             Application.Run(new MainForm());
         }
     }

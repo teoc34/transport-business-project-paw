@@ -16,6 +16,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripMenuItem exportReportMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewChartMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printMenuItem;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
 
         protected override void Dispose(bool disposing)
         {
@@ -40,6 +44,9 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -110,7 +117,9 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 new System.Windows.Forms.ToolStripMenuItem("File", null, new System.Windows.Forms.ToolStripMenuItem[] {
-                    new System.Windows.Forms.ToolStripMenuItem("Exit", null, ExitMenuItem_Click)
+                    new System.Windows.Forms.ToolStripMenuItem("Exit", null, ExitMenuItem_Click),
+                    new System.Windows.Forms.ToolStripMenuItem("Print", null, PrintMenuItem_Click),
+                    new System.Windows.Forms.ToolStripMenuItem("Print Preview", null, PrintPreviewMenuItem_Click)
                 }),
                 new System.Windows.Forms.ToolStripMenuItem("Edit", null, new System.Windows.Forms.ToolStripMenuItem[] {
                     new System.Windows.Forms.ToolStripMenuItem("Add", null, BtnAdd_Click),
@@ -141,6 +150,21 @@
             this.statusStrip.Items.Add(this.toolStripStatusLabel);
             this.Controls.Add(this.statusStrip);
             // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.UseAntiAlias = true;
+            // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(600, 450);
@@ -149,6 +173,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
     }
 }

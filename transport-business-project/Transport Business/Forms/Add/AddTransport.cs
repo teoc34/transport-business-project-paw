@@ -19,7 +19,6 @@ namespace transport_business_project.Transport_Business.Forms.Add
 
         private void AddTransport_Load(object sender, EventArgs e)
         {
-            // Initialization code if needed
         }
 
         private void btnSave_Click(object sender, EventArgs e)

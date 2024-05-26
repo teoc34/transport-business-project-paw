@@ -90,5 +90,10 @@ namespace transport_business_project.Transport_Business.Forms.Add
                 errorProvider.SetError(txtEstimatedTime, "");
             }
         }
+
+        private void AddRoute_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -37,5 +37,10 @@ namespace transport_business_project.Transport_Business.Forms.Delete
                 this.Close();
             }
         }
+
+        private void DeleteDriver_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

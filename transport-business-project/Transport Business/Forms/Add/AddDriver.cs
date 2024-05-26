@@ -105,5 +105,10 @@ namespace transport_business_project.Transport_Business.Forms.Add
                 errorProvider.SetError(txtPlateNumber, "");
             }
         }
+
+        private void AddDriver_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

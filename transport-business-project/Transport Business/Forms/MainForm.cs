@@ -201,5 +201,24 @@ namespace transport_business_project.Transport_Business.Forms
         {
             Application.Exit();
         }
+
+        private void PrintMenuItem_Click(object sender, EventArgs e)
+        {
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+        }
+
+        private void PrintPreviewMenuItem_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // Implement the printing logic here. For example:
+            e.Graphics.DrawString("Transport Management System Report", new Font("Arial", 20, FontStyle.Bold), Brushes.Black, 50, 50);
+        }
     }
 }

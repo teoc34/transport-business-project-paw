@@ -61,7 +61,6 @@ namespace transport_business_project.Transport_Business.Forms.Delete
             txtMake.Text = string.Empty;
             dtpMaintenanceDate.Value = DateTime.Now;
             txtLicensePlate.Text = string.Empty;
-            txtTypes.Text = string.Empty;
         }
     }
 }

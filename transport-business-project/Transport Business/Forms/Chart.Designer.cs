@@ -22,6 +22,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "ChartForm";
             this.Text = "Statistics Chart";
+            this.Load += new System.EventHandler(this.ChartForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChartForm_Paint);
             this.ResumeLayout(false);
         }

@@ -23,7 +23,6 @@ namespace transport_business_project.Transport_Business.Forms
         {
             Graphics g = e.Graphics;
 
-            // Get data counts
             int driverCount = 0;
             int routeCount = 0;
             int transportCount = 0;
@@ -46,7 +45,8 @@ namespace transport_business_project.Transport_Business.Forms
                 transportCount = transports.Count;
             }
 
-            // Define chart parameters
+            Console.WriteLine($"Driver Count: {driverCount}, Route Count: {routeCount}, Transport Count: {transportCount}");
+
             int barWidth = 50;
             int barSpacing = 20;
             int chartHeight = 300;
@@ -54,11 +54,14 @@ namespace transport_business_project.Transport_Business.Forms
             int startX = 100;
             int startY = 50;
 
-            // Draw chart background
+            if (maxCount == 0)
+            {
+                maxCount = 1;
+            }
+
             g.FillRectangle(Brushes.White, startX, startY, 3 * (barWidth + barSpacing), chartHeight);
             g.DrawRectangle(Pens.Black, startX, startY, 3 * (barWidth + barSpacing), chartHeight);
 
-            // Draw bars
             int driverBarHeight = (int)((double)driverCount / maxCount * chartHeight);
             g.FillRectangle(Brushes.Blue, startX, startY + (chartHeight - driverBarHeight), barWidth, driverBarHeight);
             g.DrawRectangle(Pens.Black, startX, startY + (chartHeight - driverBarHeight), barWidth, driverBarHeight);
@@ -71,10 +74,13 @@ namespace transport_business_project.Transport_Business.Forms
             g.FillRectangle(Brushes.Red, startX + 2 * (barWidth + barSpacing), startY + (chartHeight - transportBarHeight), barWidth, transportBarHeight);
             g.DrawRectangle(Pens.Black, startX + 2 * (barWidth + barSpacing), startY + (chartHeight - transportBarHeight), barWidth, transportBarHeight);
 
-            // Draw labels
             g.DrawString("Drivers", new Font("Arial", 10), Brushes.Black, startX, startY + chartHeight + 10);
             g.DrawString("Routes", new Font("Arial", 10), Brushes.Black, startX + (barWidth + barSpacing), startY + chartHeight + 10);
             g.DrawString("Transports", new Font("Arial", 10), Brushes.Black, startX + 2 * (barWidth + barSpacing), startY + chartHeight + 10);
+        }
+
+        private void ChartForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }
