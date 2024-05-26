@@ -12,8 +12,5 @@
     <li><strong>Menu Controls</strong>: Intuitive and user-friendly interface with MenuStrip, ToolStrip, StatusStrip, and ContextMenuStrip.</li>
     <li><strong>Custom Charts</strong>: Visual representation of data using custom charts created with System.Drawing.Graphics class.</li>
     <li><strong>Relational Database</strong>: Utilizes SQLite for persistent data storage, supporting complex relationships between entities.</li>
-    <li><strong>UserControl Implementation</strong>: Modular and reusable UserControl components.</li>
-    <li><strong>Data Binding</strong>: Implements data binding for individual fields and follows the ViewModel (Controller) pattern.</li>
     <li><strong>Print Functionality</strong>: Print documents with a preview option for easy record-keeping.</li>
-    <li><strong>Drag & Drop / Clipboard</strong>: Enhanced user experience with drag & drop and clipboard functionalities.</li>
 </ul>
